@@ -1,8 +1,8 @@
 import {DataTypes, Model, Sequelize} from "sequelize";
 
 export default class Secrection extends Model {
-    code!: string;
-    name!: string;
+    public code!: string;
+    public name!: string;
 }
 
 
@@ -15,12 +15,12 @@ export function secrectionInit(sequelize: Sequelize) {
         },
         name: {
             type: DataTypes.STRING(45),
-            allowNull: false
-        }
+            allowNull: false,
+        },
     }, {
         sequelize,
-        tableName: 'secrection',
-        engine: 'InnoDB',
-        charset: 'utf8',
+        tableName: "secrection",
+        engine: "InnoDB",
+        charset: "utf8",
     });
 }

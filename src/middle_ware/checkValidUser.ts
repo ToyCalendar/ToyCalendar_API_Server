@@ -5,12 +5,12 @@ import config from "../config";
 import User from "../models/User";
 
 export const checkValidUser = async (req: Request, res: Response, next: NextFunction) => {
-    const token: string = req.headers.token as string;
+    const token: string = req.headers.Authorization as string;
 
     if (!token) {
         const code = ErrorCode.FORBIDDEN_DENIED;
         return res.status(code).json({
-            msg: ErrorMessage(code)
+            msg: ErrorMessage(code),
         });
     }
 
@@ -18,13 +18,13 @@ export const checkValidUser = async (req: Request, res: Response, next: NextFunc
         const id = jwt.decode(token, config.auth.key).id;
 
         const user = await User.findOne({
-            where: {id}
+            where: {id},
         });
 
         if (!user) {
             const code = ErrorCode.FORBIDDEN_DENIED;
             return res.status(code).json({
-                msg: ErrorMessage(code)
+                msg: ErrorMessage(code),
             });
         }
     } catch (e) {

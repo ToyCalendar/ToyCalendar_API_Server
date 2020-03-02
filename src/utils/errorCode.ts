@@ -21,19 +21,19 @@ export function ErrorMessage(code: ErrorCode) {
 
     switch (code) {
         case ErrorCode.OK: {
-            return "ok"
+            return "ok";
         }
         case ErrorCode.CREATE: {
-            return "success create"
+            return "success create";
         }
         case ErrorCode.INVALID_REQUEST: {
-            return "invalid request"
+            return "invalid request";
         }
         case ErrorCode.UN_AUTHORIZATION: {
             return "un authorization";
         }
         case ErrorCode.FORBIDDEN_DENIED: {
-            return "permission denied"
+            return "permission denied";
         }
         case ErrorCode.NOT_FOUND: {
             return "page not found";
@@ -55,5 +55,5 @@ export function ErrorMessage(code: ErrorCode) {
 
 
 export function responseErrorCodeWithMessage(res: Response, code: ErrorCode) {
-    return res.status(code).json({msg: ErrorMessage(code)})
+    return res.status(code).json({msg: ErrorMessage(code)});
 }

@@ -1,7 +1,7 @@
 type Params<T = any> = ReadonlyArray<Readonly<T>>;
 
 function validFunc(value: Readonly<any>): boolean {
-    return value !== null && value !== undefined
+    return value !== null && value !== undefined;
 }
 
 function invalidFunc(value: Readonly<any>): boolean {

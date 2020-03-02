@@ -25,12 +25,12 @@ export function connectionPartnerInit(sequelize: Sequelize) {
         },
         connectionDate: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
         },
     }, {
         sequelize,
-        tableName: 'connectionPartner',
-        engine: 'InnoDB',
-        charset: 'utf8',
+        tableName: "connectionPartner",
+        engine: "InnoDB",
+        charset: "utf8",
     });
 }

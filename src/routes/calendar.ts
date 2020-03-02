@@ -10,8 +10,8 @@ import User from "../models/User";
 const router = express.Router();
 
 // TODO 미래, 과거, 현재 계산 필요
-router.get('/:year', async (req, res, next) => {
-    const token: string = req.headers.token as string;
+router.get("/:year", async (req, res, next) => {
+    const token: string = req.headers.Authorization as string;
     const userId = jwt.decode(token, config.auth.key).id;
 
     // year만 있을 경우 해당 년도 모두 조회
@@ -25,26 +25,28 @@ router.get('/:year', async (req, res, next) => {
         const startDate = `${year}-01-01`;
         const lastDate = `${year}-12-31`;
 
-        const dates = await SecretInformation.findAll({
-            where: {
-                date: {
-                    [sequelize.Op.gte]: startDate,
-                    [sequelize.Op.lte]: lastDate
+        const dates = await SecretInformation.findAll(
+            {
+                where: {
+                    date: {
+                        [sequelize.Op.gte]: startDate,
+                        [sequelize.Op.lte]: lastDate,
+                    },
+                    userId,
                 },
-                userId: userId
-            }
-        });
+                include: [{model: User}],
+            });
 
         const code = ErrorCode.OK;
         return res.status(code).json({
-            msg:ErrorMessage(code),
-            contents: dates
+            msg: ErrorMessage(code),
+            contents: dates,
         });
     }
 });
 
-router.get('/:year/:month', async (req, res, next) => {
-    const token: string = req.headers.token as string;
+router.get("/:year/:month", async (req, res, next) => {
+    const token: string = req.headers.Authorization as string;
     const userId = jwt.decode(token, config.auth.key).id;
 
     // year와 Month가 있을 경우 해당 월만 조회
@@ -63,17 +65,17 @@ router.get('/:year/:month', async (req, res, next) => {
             where: {
                 date: {
                     [sequelize.Op.gte]: startDate,
-                    [sequelize.Op.lte]: lastDate
+                    [sequelize.Op.lte]: lastDate,
                 },
-                userId: userId
-            }
+                userId,
+            },
         });
 
-        console.log('date', dates);
+        console.log("date", dates);
         const code = ErrorCode.OK;
         return res.status(code).json({
-            msg:ErrorMessage(code),
-            contents: dates
+            msg: ErrorMessage(code),
+            contents: dates,
         });
     }
 
@@ -81,7 +83,7 @@ router.get('/:year/:month', async (req, res, next) => {
 
     const code = ErrorCode.OK;
     res.status(code).json({
-        msg: ErrorMessage(code)
+        msg: ErrorMessage(code),
     });
 });
 

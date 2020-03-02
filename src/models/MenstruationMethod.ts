@@ -33,7 +33,7 @@ export function menstruationMethodInit(sequelize: Sequelize) {
         averageCustomTerm: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true,
-            defaultValue: 5
+            defaultValue: 5,
         },
         averageCycleYn: {
             type: DataTypes.BOOLEAN,
@@ -42,12 +42,12 @@ export function menstruationMethodInit(sequelize: Sequelize) {
         averageCustomCycle: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true,
-            defaultValue: 28
-        }
+            defaultValue: 28,
+        },
     }, {
         sequelize,
-        tableName: 'menstruationMethod',
-        engine: 'InnoDB',
-        charset: 'utf8',
+        tableName: "menstruationMethod",
+        engine: "InnoDB",
+        charset: "utf8",
     });
 }

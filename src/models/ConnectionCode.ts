@@ -1,15 +1,15 @@
 import {DataTypes, Model, Sequelize} from "sequelize";
 
 export default class ConnectionCode extends Model {
-    userID!: number;
-    code!: string;
-    createDate!: Date;
-    life!: number; // 1: 1초, 60: 1분, 3600: 1시간
+    public userID!: number;
+    public code!: string;
+    public createDate!: Date;
+    public life!: number; // 1: 1초, 60: 1분, 3600: 1시간
 }
 
 export function connectionCodeInit(sequelize: Sequelize) {
     ConnectionCode.init({
-        userID:{
+        userID: {
             type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             allowNull: false,
@@ -28,8 +28,8 @@ export function connectionCodeInit(sequelize: Sequelize) {
         },
     }, {
         sequelize,
-        tableName: 'connectionCode',
-        engine: 'InnoDB',
-        charset: 'utf8',
-    })
+        tableName: "connectionCode",
+        engine: "InnoDB",
+        charset: "utf8",
+    });
 }

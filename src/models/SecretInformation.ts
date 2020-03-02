@@ -1,11 +1,11 @@
 import {DataTypes, Model, Sequelize} from "sequelize";
 
 export default class SecretInformation extends Model {
-    id!: number;
-    userId!: number;
-    date!: Date;
-    contraceptiveYn?: boolean; // 피임 기구 사용 여부
-    secretion?: string; // 체크 된 것만 ,로 구분하여 저장
+    public id!: number;
+    public userId!: number;
+    public date!: Date;
+    public contraceptiveYn?: boolean; // 피임 기구 사용 여부
+    public secretion?: string; // 체크 된 것만 ,로 구분하여 저장
 }
 
 export function secretInformationInit(sequelize: Sequelize) {
@@ -34,8 +34,8 @@ export function secretInformationInit(sequelize: Sequelize) {
         },
     }, {
         sequelize,
-        tableName: 'secretInformation',
-        engine: 'InnoDB',
-        charset: 'utf8',
+        tableName: "secretInformation",
+        engine: "InnoDB",
+        charset: "utf8",
     });
 }

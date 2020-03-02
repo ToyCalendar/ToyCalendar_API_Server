@@ -1,4 +1,4 @@
-import * as express from 'express';
+import * as express from "express";
 import User from "../models/User";
 import {convertSNSTypeToSNS} from "../utils/convertSNSTypeToSNS";
 import {WhereOptions} from "sequelize";
@@ -11,7 +11,7 @@ import {invalid} from "../utils/validate";
 
 const router = express.Router();
 
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
 
     const {snsType, snsID} = req.body;
 
@@ -23,14 +23,14 @@ router.post('/login', async (req, res) => {
     const snsTypeAndId: WhereOptions = convertSNSTypeToSNS(snsType, snsID) as WhereOptions;
 
     const user = await User.findOne<User>({
-        where: {...snsTypeAndId}
+        where: {...snsTypeAndId},
     });
 
     if (!user) {
         const code = ErrorCode.FORBIDDEN_DENIED;
         return res.status(code).json({
-            msg: ErrorMessage(code)
-        })
+            msg: ErrorMessage(code),
+        });
     }
 
     const token = jwt.encode({id: user.id}, config.auth.key);
@@ -40,24 +40,24 @@ router.post('/login', async (req, res) => {
 
 });
 
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
     const {snsType, snsID, nickname, photo, email, birth} = req.body;
 
     if (invalid(snsType) || invalid(snsID) || invalid(nickname)) {
         const code = ErrorCode.INVALID_REQUEST;
-        return res.status(code).json({msg: ErrorMessage(code)})
+        return res.status(code).json({msg: ErrorMessage(code)});
     }
 
     const snsTypeAndId: WhereOptions = convertSNSTypeToSNS(snsType, snsID) as WhereOptions;
 
     const user = await User.findOne({
-        where: {...snsTypeAndId}
+        where: {...snsTypeAndId},
     });
 
     if (user) {
         const code = ErrorCode.ALREADY_EXIST;
         return res.status(code).json({
-            msg: ErrorMessage(code)
+            msg: ErrorMessage(code),
         });
     }
 
@@ -67,23 +67,23 @@ router.post('/signup', async (req, res) => {
             ...snsTypeAndId,
             photo,
             email,
-            birth
+            birth,
         });
     } catch (e) {
         const code = ErrorCode.SERVER_ERROR;
         return res.status(code).json({
-            msg: ErrorMessage(code)
+            msg: ErrorMessage(code),
         });
     }
 
     const code = ErrorCode.CREATE;
 
     return res.status(code).json({
-        msg: ErrorMessage(code)
+        msg: ErrorMessage(code),
     });
 });
 
-router.get('/apiToken', async (req, res) => {
+router.get("/apiToken", async (req, res) => {
 
 });
 

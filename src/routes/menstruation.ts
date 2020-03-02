@@ -1,5 +1,5 @@
-import * as express from 'express';
-import * as jwt from 'jwt-simple';
+import * as express from "express";
+import * as jwt from "jwt-simple";
 import config from "../config";
 import {ErrorCode, ErrorMessage, responseErrorCodeWithMessage} from "../utils/errorCode";
 import {invalid, invalidNumber, valid} from "../utils/validate";
@@ -8,20 +8,20 @@ import {response} from "express";
 
 const router = express.Router();
 
-router.post('/', (req, res, next) => {
+router.post("/", (req, res, next) => {
 
 });
 
-router.post('/init', async (req, res) => {
+router.post("/init", async (req, res) => {
 
-    const token: string = req.headers.token as string;
+    const token: string = req.headers.Authorization as string;
 
     const userId = jwt.decode(token, config.auth.key).id;
 
     const {averageTermYn, averageCustomTerm, averageCycleYn, averageCustomCycle} = req.body;
 
     const menstruation = MenstruationMethod.findOne({
-        where: {userId}
+        where: {userId},
     });
 
     // 기존에 존재하면 수정
@@ -33,7 +33,7 @@ router.post('/init', async (req, res) => {
                 MenstruationMethod.update({
                     averageTermYn,
                 }, {
-                    where: {userId}
+                    where: {userId},
                 });
             }
 
@@ -41,7 +41,7 @@ router.post('/init', async (req, res) => {
                 MenstruationMethod.update({
                     averageCustomTerm,
                 }, {
-                    where: {userId}
+                    where: {userId},
                 });
             }
 
@@ -49,7 +49,7 @@ router.post('/init', async (req, res) => {
                 MenstruationMethod.update({
                     averageCycleYn,
                 }, {
-                    where: {userId}
+                    where: {userId},
                 });
             }
 
@@ -57,7 +57,7 @@ router.post('/init', async (req, res) => {
                 MenstruationMethod.update({
                     averageCustomCycle,
                 }, {
-                    where: {userId}
+                    where: {userId},
                 });
             }
 
@@ -94,7 +94,7 @@ router.post('/init', async (req, res) => {
             averageTermYn,
             averageCycleYn,
             averageCustomTerm,
-            averageCustomCycle
+            averageCustomCycle,
         });
 
         const code = ErrorCode.CREATE;

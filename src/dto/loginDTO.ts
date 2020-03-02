@@ -2,9 +2,9 @@ export class LoginDTO {
 
     constructor(readonly token: string) {}
 
-    toVO() {
+    public toVO() {
         return {
-            token: this.token
-        }
+            token: this.token,
+        };
     }
 }

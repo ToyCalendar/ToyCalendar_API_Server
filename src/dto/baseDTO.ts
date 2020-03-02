@@ -1,13 +1,13 @@
 export class BaseDTO<T> {
-    data: T;
+    public data: T;
 
     constructor(data: T) {
         this.data = data;
     }
 
-    toVO() {
+    public toVO() {
         return {
-            data: this.data
-        }
+            data: this.data,
+        };
     }
 }

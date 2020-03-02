@@ -90,8 +90,8 @@ export function userInit(sequelize: Sequelize) {
         },
     }, {
         sequelize,
-        tableName: 'user',
-        engine: 'InnoDB',
-        charset: 'utf8',
+        tableName: "user",
+        engine: "InnoDB",
+        charset: "utf8",
     });
 }

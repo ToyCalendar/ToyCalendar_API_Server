@@ -28,12 +28,12 @@ export function menstruationInit(sequelize: Sequelize) {
         },
         endMenstruationDate: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: true,
         },
     }, {
         sequelize,
-        tableName: 'menstruation',
-        engine: 'InnoDB',
-        charset: 'utf8',
+        tableName: "menstruation",
+        engine: "InnoDB",
+        charset: "utf8",
     });
 }

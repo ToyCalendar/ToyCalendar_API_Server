@@ -12,34 +12,34 @@ export function convertSNSTypeToSNS(snsType: SNSType, id: string): {
     facebookID?: string,
     googleID?: string,
     lineID?: string,
-    kakaoID?: string
+    kakaoID?: string,
 } {
     switch (snsType) {
         case SNSType.FACE_BOOK: {
             return {
-                snsType: snsType,
-                facebookID: id
+                snsType,
+                facebookID: id,
             };
         }
         case SNSType.GOOGLE: {
             return {
-                snsType: snsType,
-                googleID: id
-            }
+                snsType,
+                googleID: id,
+            };
         }
         case SNSType.KAKAO: {
             return {
-                snsType: snsType,
-                kakaoID: id
-            }
+                snsType,
+                kakaoID: id,
+            };
         }
         case SNSType.LINE: {
             return {
-                snsType: snsType,
-                lineID: id
-            }
+                snsType,
+                lineID: id,
+            };
         }
     }
 
-    throw new Error("invalid sns type")
+    throw new Error("invalid sns type");
 }

@@ -9,17 +9,17 @@ import SecretInformation from "../models/SecretInformation";
 const router = express.Router();
 
 // 민감정보 조회 API
-router.get('', async (req, res) => {
+router.get("", async (req, res) => {
     const data = await Secrection.findAll();
 
-    const result = data.map(it => ({
+    const result = data.map((it) => ({
         code: it.code,
-        name: it.name
+        name: it.name,
     }));
 
     if (data) {
         return res.status(ErrorCode.OK).json({
-            data: result
+            data: result,
         });
     }
 
@@ -27,8 +27,8 @@ router.get('', async (req, res) => {
 });
 
 // 민감정보 저장 API
-router.post('/save', async (req, res) => {
-    const token: string = req.headers.token as string;
+router.post("/save", async (req, res) => {
+    const token: string = req.headers.Authorization as string;
 
     const userId = jwt.decode(token, config.auth.key).id;
 
@@ -42,9 +42,9 @@ router.post('/save', async (req, res) => {
 
     const info = await SecretInformation.findOne({
         where: {
-            userId: userId,
-            date: date
-        }
+            userId,
+            date,
+        },
     });
 
     if (info) {
@@ -52,12 +52,12 @@ router.post('/save', async (req, res) => {
             await SecretInformation.update({
                 contraceptiveYn,
                 date,
-                secretion
+                secretion,
             }, {
                 where: {
-                    userId: userId,
-                    date: date
-                }
+                    userId,
+                    date,
+                },
             });
 
             const code = ErrorCode.OK;
@@ -73,7 +73,7 @@ router.post('/save', async (req, res) => {
             userId,
             contraceptiveYn,
             date,
-            secretion
+            secretion,
         });
         const code = ErrorCode.CREATE;
         return responseErrorCodeWithMessage(res, code);
